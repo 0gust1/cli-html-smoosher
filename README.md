@@ -6,17 +6,17 @@ It's a little nodeJS CLI tool to :
 - inline and minify CSS and JS
 - output the result webpage on the standard output
 
-In the directory :
+You must have nodeJS installed on your system...
 
-``node index http://some.random.url --minify  > output.html``
+- checkout the repository
+- In the directory type `npm link`.
 
-Or, to use it everywhere :
-
-In the directory type `npm link`.
-
-Now you can do ``cli-smoosh http://some.random.url --minify > result.txt``
-
+Now you can do ``smoosh http://some.random.url --minify > result.txt``
 
 ##TODO
 
---strip, --strip_css & --strip_js options
+warning : The code is quite rude actually ;)
+
+- --strip, --strip_css & --strip_js options
+- ability to process files
+- testing

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
- //module.exports = function(){
 
 var http = require("http");
 var https = require("https");

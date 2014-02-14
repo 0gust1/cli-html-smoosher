@@ -9,7 +9,8 @@ It's a little nodeJS CLI tool to :
 You must have nodeJS installed on your system...
 
 - checkout the repository
-- In the directory type `npm link`.
+- In the directory type `npm install`.
+- and type `npm link`.
 
 Now you can do ``smoosh http://some.random.url --minify > result.txt``
 

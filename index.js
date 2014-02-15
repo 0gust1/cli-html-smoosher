@@ -12,9 +12,9 @@ var Q = require('q'); //utiliser q-io (https://github.com/kriskowal/q-io) ?
 
 var argv = require("nomnom")
     .options({
-        path: {
+        url: {
             position: 0,
-            help: "Test file to run",
+            help: "URL adress to crawl",
             list: true
         },
         minify: {

@@ -172,7 +172,6 @@ var processContent = function processContent(data, baseUrl) {
     //var deferred = new Deferred();
     var $ = cheerio.load(data);
     var promises = [];
-    debugger;
     //object containing the promises for stylesheets processing
     var inliningStyle = $("link[rel='stylesheet']").map(processingCSS);
 

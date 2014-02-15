@@ -12,7 +12,8 @@ You must have nodeJS installed on your system...
 - In the directory type `npm install`.
 - and type `npm link`.
 
-Now you can do ``smoosh http://some.random.url --minify > result.txt``
+Now you can do ``smoosh http://some.random.url --minify > result.txt``.
+Type ``smoosh -h`` for help.
 
 ##TODO
 

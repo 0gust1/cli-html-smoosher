@@ -10,7 +10,7 @@ It's a little nodeJS CLI tool to :
 - In the directory type `npm install`.
 - and type `npm link`.
 
-Now you can do ``smoosh http://some.random.url --minify > result.txt``.  
+Now you can do ``smoosh http://some.random.url --minify > result.html``.  
 
 Type ``smoosh -h`` for help.
 

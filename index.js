@@ -6,9 +6,8 @@ var cheerio = require("cheerio");
 var uglifyjs = require('uglifyjs');
 var uglifycss = require('uglifycss');
 var Url = require('url');
-var Q = require('q'); //utiliser q-io (https://github.com/kriskowal/q-io) ?
-// var whacko = require('whacko');
-//  var HTTP = require("q-io/http"); //<--
+var Promise = require("bluebird");
+//var Q = require('q'); //utiliser q-io (https://github.com/kriskowal/q-io) ?
 
 var argv = require("nomnom")
     .help("Get a webpage, inline all stylesheet and scripts, output on stdout")
@@ -163,8 +162,7 @@ var processContent = function processContent(data, baseUrl) {
             script = Url.resolve(baseUrl, script);
 
             getRessourceP(script).then(function(data) {
-                //console.log("processing script :"+ typeof script);
-                //console.log("contains ?"+script.indexOf('min.js') === -1);
+
                 var out='';
 
                 if(script.indexOf('min.js') === -1){

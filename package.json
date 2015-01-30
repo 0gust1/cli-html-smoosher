@@ -13,10 +13,9 @@
   "author": "0gust1",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "bluebird": "^2.9.4",
     "cheerio": "^0.18.0",
     "nomnom": "^1.8.1",
-    "optimist": "^0.6.1",
-    "q": "^1.1.2",
     "uglifycss": "0.0.11",
     "uglifyjs": "^2.3.6"
   }

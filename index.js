@@ -172,7 +172,7 @@ var processContent = function processContent(data, baseUrl) {
         promises = [].slice.call(inliningStyle);
     }
 
-    promises.concat([].slice.call(inliningScripts));
+    promises = promises.concat([].slice.call(inliningScripts));
 
     //when all promises have resolved, output the processed html document
     Q.all(promises).then(function() {

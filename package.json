@@ -1,23 +1,23 @@
 {
-    "name": "cli-html-smoosher",
-    "version": "0.0.0",
-    "description": "",
-    "main": "index.js",
-    "preferGlobal": "true",
-    "bin": {
-        "smoosh": "index.js"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "0gust1",
-    "license": "BSD-2-Clause",
-    "devDependencies": {
-        "cheerio": "~0.13.1",
-        "uglifyjs": "~2.3.6",
-        "optimist": "~0.6.0",
-        "uglifycss": "0.0.7",
-        "q": "~1.0.0",
-        "nomnom": "~1.6.2"
-    }
+  "name": "cli-html-smoosher",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "preferGlobal": "true",
+  "bin": {
+    "smoosh": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "0gust1",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "nomnom": "^1.8.1",
+    "optimist": "^0.6.1",
+    "q": "^1.1.2",
+    "uglifycss": "0.0.11",
+    "uglifyjs": "^2.3.6"
+  }
 }

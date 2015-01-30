@@ -56,7 +56,8 @@ var processJSInput = null;
 if (argv.minify | argv.minify_js) {
     processJSInput = function processJSInput(input) {
         return uglifyjs.minify(input, {
-            fromString: true
+            fromString: true,
+            warnings:false
         }).code;
     };
 } else {
@@ -89,6 +90,7 @@ var getRessource = function getRessource(url, callback) {
             data += chunk;
         });
         res.on("end", function() {
+            //console.log("data ok :"+url);
             callback(data, url);
         });
     }).on("error", function() {
@@ -111,6 +113,7 @@ var getRessourceP = function getRessourceP(url) {
             data += chunk;
         });
         res.on("end", function() {
+            //console.log("data ok :"+url);
             deferred.resolve(data);
         });
     }).on("error", function(e) {
@@ -160,7 +163,20 @@ var processContent = function processContent(data, baseUrl) {
             script = Url.resolve(baseUrl, script);
 
             getRessourceP(script).then(function(data) {
-                elem.replaceWith('<script>' + processJSInput(data) + '</script>');
+                //console.log("processing script :"+ typeof script);
+                //console.log("contains ?"+script.indexOf('min.js') === -1);
+                var out='';
+
+                if(script.indexOf('min.js') === -1){
+                   //console.log("not minified !");
+                   out = processJSInput(data);
+                }else{
+                    //console.log("minified");
+                    out = data;
+                }
+
+                elem.replaceWith('<script>' + out + '</script>');
+                //console.log("\n----\n"+$.html()+"\n----\n");
                 defer.resolve();
             });
             return defer.promise;
@@ -176,6 +192,7 @@ var processContent = function processContent(data, baseUrl) {
 
     //when all promises have resolved, output the processed html document
     Q.all(promises).then(function() {
+        ////console.log("finished");
         console.log($.html());
     });
 

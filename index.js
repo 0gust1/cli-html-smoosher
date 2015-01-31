@@ -127,7 +127,14 @@ var getRessourceP = function getRessourceP(url) {
 //main function
 var processContent = function processContent(data, baseUrl) {
     //var deferred = new Deferred();
-    var $ = cheerio.load(data);
+    var $ = cheerio.load(data/*,{
+        normalizeWhitespace: true,
+        xmlMode: false,
+        decodeEntities: false,
+        recognizeSelfClosing:true,
+        recognizeCDATA:true
+    }*/);
+
     //object containing the promises for stylesheets processing
     var inliningStyle;
     //object containing the promises for script tags processing
@@ -171,7 +178,7 @@ var processContent = function processContent(data, baseUrl) {
                 elem.replaceWith('<script>' + out + '</script>');
                 defer.resolve();
             }).fail(function(error) {
-                console.log("Error replacing script : " + error);
+                console.error("Error replacing script : " + error);
             });
             return defer.promise;
         });
@@ -188,7 +195,7 @@ var processContent = function processContent(data, baseUrl) {
     Q.all(promises).then(function() {
         console.log($.html());
     }).fail(function(error) {
-        console.log("Error writing html : "+error);
+        console.error("Something wrong happened. Error writing html : "+error);
     });
 
     function processingCSS() {
@@ -208,7 +215,7 @@ var processContent = function processContent(data, baseUrl) {
             elem.replaceWith('<style>' + processCSSInput(data) + '</style>');
             defer.resolve();
         }).fail(function(error) {
-            console.log("Error replacing css : " + error);
+            console.error("Error replacing css : " + error);
         });
         return defer.promise;
     }

@@ -57,7 +57,7 @@ if (argv.minify | argv.minify_js) {
     processJSInput = function processJSInput(input) {
         return uglifyjs.minify(input, {
             fromString: true,
-            warnings:false
+            warnings: false
         }).code;
     };
 } else {
@@ -156,28 +156,22 @@ var processContent = function processContent(data, baseUrl) {
             if (script & script.match(/^\/\//)) {
                 defer.reject();
             }
-            // if (Url.parse(script).protocol) {
-            //   return;
-            // }
 
             script = Url.resolve(baseUrl, script);
 
             getRessourceP(script).then(function(data) {
-                //console.log("processing script :"+ typeof script);
-                //console.log("contains ?"+script.indexOf('min.js') === -1);
-                var out='';
+                var out = '';
 
-                if(script.indexOf('min.js') === -1){
-                   //console.log("not minified !");
-                   out = processJSInput(data);
-                }else{
-                    //console.log("minified");
+                if (script.indexOf('min.js') === -1) {
+                    out = processJSInput(data);
+                } else {
                     out = data;
                 }
 
                 elem.replaceWith('<script>' + out + '</script>');
-                //console.log("\n----\n"+$.html()+"\n----\n");
                 defer.resolve();
+            }).fail(function(error) {
+                console.log("Error replacing script : " + error);
             });
             return defer.promise;
         });
@@ -192,8 +186,9 @@ var processContent = function processContent(data, baseUrl) {
 
     //when all promises have resolved, output the processed html document
     Q.all(promises).then(function() {
-        ////console.log("finished");
         console.log($.html());
+    }).fail(function(error) {
+        console.log("Error writing html : "+error);
     });
 
     function processingCSS() {
@@ -206,15 +201,14 @@ var processContent = function processContent(data, baseUrl) {
         if (style.match(/^\/\//)) {
             defer.reject();
         }
-        // if (Url.parse(style).protocol) {
-        //   return;
-        // }
 
         style = Url.resolve(baseUrl, style);
 
         getRessourceP(style).then(function(data) {
             elem.replaceWith('<style>' + processCSSInput(data) + '</style>');
             defer.resolve();
+        }).fail(function(error) {
+            console.log("Error replacing css : " + error);
         });
         return defer.promise;
     }

@@ -94,7 +94,7 @@ var getRessource = function getRessource(url, callback) {
             callback(data, url);
         });
     }).on("error", function() {
-        callback(null);
+        callback(null, url);
     });
 };
 
@@ -126,6 +126,11 @@ var getRessourceP = function getRessourceP(url) {
 
 //main function
 var processContent = function processContent(data, baseUrl) {
+    if (data === null) {
+        console.error('Error: resource not loaded at ' + baseUrl);
+        process.exit(1);
+    }
+
     //var deferred = new Deferred();
     var $ = cheerio.load(data/*,{
         normalizeWhitespace: true,

@@ -3,7 +3,6 @@
 var http = require("http");
 var https = require("https");
 var cheerio = require("cheerio");
-var uglifyjs = require('uglifyjs');
 var uglifycss = require('uglifycss');
 var Url = require('url');
 var Q = require('q'); //utiliser q-io (https://github.com/kriskowal/q-io) ?
@@ -47,18 +46,25 @@ var argv = require("nomnom")
             abbr: '',
             flag: true,
             help: 'strip all scripts'
+        },
+        es5: {
+            abbr: '5',
+            flag: true,
+            help: 'use ES5 only (ECMAScript 5)'
         }
     })
     .parse();
 
 var processJSInput = null;
 
+var uglifyjs = require(argv.es5 ? 'uglify-js' : 'uglify-es');
+
+
 if (argv.minify | argv.minify_js) {
     processJSInput = function processJSInput(input) {
-        return uglifyjs.minify(input, {
-            fromString: true,
-            warnings: false
-        }).code;
+        var result = uglifyjs.minify(input, { warnings: true });
+        if (result.error) throw(result.error);
+        return result.code;
     };
 } else {
     processJSInput = function processJSInput(input) {
@@ -179,7 +185,6 @@ var processContent = function processContent(data, baseUrl) {
                 } else {
                     out = data;
                 }
-
                 elem.replaceWith('<script>' + out + '</script>');
                 defer.resolve();
             }).fail(function(error) {

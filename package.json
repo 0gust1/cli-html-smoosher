@@ -18,6 +18,8 @@
     "q": "^1.1.2",
     "uglifycss": "0.0.11",
     "uglify-js": "^3.0.10",
-    "uglify-es": "^3.0.10"
+    "uglify-es": "^3.0.10",
+    "babel-core": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1"
   }
 }

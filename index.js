@@ -58,12 +58,15 @@ var argv = require("nomnom")
 var processJSInput = null;
 
 var uglifyjs = require(argv.es5 ? 'uglify-js' : 'uglify-es');
+var babel = require("babel-core");
 
 
 if (argv.minify | argv.minify_js) {
     processJSInput = function processJSInput(input) {
         var result = uglifyjs.minify(input, { warnings: true });
         if (result.error) throw(result.error);
+        // return result.code;
+        result = babel.transform(result.code, { presets: [ 'babel-preset-es2015' ].map(require.resolve) });
         return result.code;
     };
 } else {
